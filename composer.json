@@ -1,0 +1,19 @@
+{
+    "name": "webidea24/magento2-module-category-seo-text",
+    "description": "Magento 2 Module: Add easily a seo-text to the category page on footer",
+    "type": "magento2-module",
+    "require": {
+        "magento/framework": "*"
+    },
+    "license": [
+        "MIT"
+    ],
+    "autoload": {
+        "files": [
+            "registration.php"
+        ],
+        "psr-4": {
+            "Webidea24\\CategorySeoText\\": ""
+        }
+    }
+}
