@@ -1,7 +1,8 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Webidea24\CategorySeoText\Block;
 
+use Magento\Catalog\Helper\Output;
 use Magento\Catalog\Model\Category;
 use Magento\Catalog\Model\Layer\Resolver;
 use Magento\Framework\View\Element\Template;
@@ -9,19 +10,20 @@ use Magento\Framework\View\Element\Template;
 class CategorySeoText extends Template
 {
 
-    /**
-     * @var Resolver
-     */
-    private $catalogResolver;
+    private Resolver $catalogResolver;
+
+    private Output $outputHelper;
 
     public function __construct(
         Template\Context $context,
         Resolver $resolver,
+        Output $outputHelper,
         array $data = []
     )
     {
         parent::__construct($context, $data);
         $this->catalogResolver = $resolver;
+        $this->outputHelper = $outputHelper;
     }
 
     public function toHtml()
@@ -33,9 +35,12 @@ class CategorySeoText extends Template
         return '';
     }
 
-    public function getSeoText()
+    public function getSeoText(): ?string
     {
-        return $this->getCurrentCategory()->getData('wi24_seo_text');
+        $category = $this->getCurrentCategory();
+        $html = $category->getData('wi24_seo_text');
+
+        return !empty($html) ? $this->outputHelper->categoryAttribute($category, $html, 'wi24_seo_text') : null;
     }
 
     public function getCurrentCategory(): Category

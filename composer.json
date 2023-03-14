@@ -3,6 +3,7 @@
     "description": "Magento 2 Module: Add easily a seo-text to the category page on footer",
     "type": "magento2-module",
     "require": {
+        "php": ">=7.4",
         "magento/framework": "*"
     },
     "license": [
